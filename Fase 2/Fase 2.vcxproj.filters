@@ -21,7 +21,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="blobdetectionavans.h">
+    <ClInclude Include="avansvisionlib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ImageObject.h">
@@ -35,7 +35,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="blobdetectionavans.cpp">
+    <ClCompile Include="avansvisionlib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ImageObject.cpp">

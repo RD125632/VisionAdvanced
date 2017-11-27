@@ -1,13 +1,14 @@
 // avansvisionlib - Growing Visionlibrary of Avans based on OpenCV 2.4.10 
 // Goal: deep understanding of vision algorithms by means of developing own (new) algorithms.
 // 
-// Copyright Jan Oostindie, basic version 0.2 dd 15-9-2016. Contains basic functions to perform calculations on matrices/images of class Mat.
+// Copyright Jan Oostindie, basic version 1.0 dd 8-11-2016. Contains basic functions to perform calculations on matrices/images of class Mat.
 // Including BLOB labeling functions
 //
 // Note: Students of Avans are free to use this library in projects and for own vision competence development. Others may ask permission to use it by means 
 // of sending an email to Jan Oostindie, i.e. jac.oostindie@avans.nl
+
 #include "stdafx.h"
-#include "blobdetectionavans.h"
+#include "avansvisionlib.h"
 #include <math.h>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
@@ -290,7 +291,7 @@ void show16SImageStretch(Mat m, string windowTitle) {
 	mCopy.convertTo(mCopy, CV_8U);
 //	namedWindow(windowTitle, CV_WINDOW_AUTOSIZE);
 	imshow(windowTitle, mCopy);
-	cvWaitKey(0);
+	waitKey(0);
 } // show16SImage
 
 // func: shows a 16S image on the screen. All values clipped to the interval 0-255
@@ -302,7 +303,7 @@ void show16SImageClip(Mat m, string windowTitle) {
 	mCopy.convertTo(mCopy, CV_8U);
 //	namedWindow("show16SImageClip", CV_WINDOW_AUTOSIZE);
 	imshow(windowTitle, mCopy);
-	cvWaitKey(0);
+	waitKey(0);
 } // show16SImage
 
 
@@ -682,7 +683,6 @@ int labelBLOBs(Mat binaryImage, Mat & labeledImage) {
 	//  0: always a "0"
 	//  1, 2, 3,... : a "1" which is visited and is labeled with the object number.
 	Mat admin = makeAdmin(binaryImage);
-	imwrite("b:\\binaryImage.jpg", binaryImage);
 	int row = 1;
 	int col = 1;
 
@@ -708,7 +708,7 @@ void removeBLOB(Mat & admin, int blobNr) {
 	for (int row = 1; row < admin.rows-2; row++) 
 		for (int col = 1; col < admin.cols-2; col++) {
 			value = getEntryImage(admin, row, col);
-			if (value >= 10) value /= 10;
+			while (value > 10) value /= 10;
 			if (value == blobNr) setEntryImage(admin, row, col, 0);
 	    }
 } // removeBLOB
@@ -762,3 +762,4 @@ int labelBLOBsInfo(Mat binaryImage, Mat & labeledImage,
 	// laatste volgnummer is gelijk aan het aantal gevonden blobs
 	return blobNr;
 } // labelBLOBsInfo
+
