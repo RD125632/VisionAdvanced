@@ -62,6 +62,22 @@ void ImageObject::findContour(Mat binary_image, Point2d firstPixel)
 
 void ImageObject::findBoundingBox()
 {
+	int minX = 100000, minY = 100000, maxX = 0 , maxY = 0;
+
+	for (Point p : contour)
+	{
+		if (p.x < minX)			{ minX = p.x; } 
+		else if (p.x > maxX )	{ maxX = p.x; }
+		if (p.y < minY)			{ minY = p.y; }
+		else if (p.y > maxY)	{ maxY = p.y; }
+	}
+
+	bound_box = BoundingBox{
+		{ minX, minY },
+		{ maxX, minY },
+		{ minX, maxY },
+		{ maxX, maxY }
+	};
 }
 
 void ImageObject::findBendingEnergy()

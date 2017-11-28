@@ -9,7 +9,14 @@ using namespace std;
 using namespace cv;
 
 class ImageObject {
+	struct BoundingBox {
+		Point top_left;
+		Point top_right;
+		Point bottom_left;
+		Point bottom_right;
+	};
 private:
+	BoundingBox bound_box;
 	vector<Point> contour;
 	vector<Point> boundingBox;
 	vector<int> chainCode;
@@ -18,6 +25,7 @@ public:
 	vector<Point> getContour() { return contour; };
 	vector<int> getChainCode() { return chainCode; };
 	double getBendingEnergy() { return bendingEnergy; };
+	BoundingBox getBoundBox() { return bound_box; };
 
 	/**
 	@desc	Find a contour in binary_image with a given first pixel
