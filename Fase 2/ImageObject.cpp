@@ -44,7 +44,7 @@ void ImageObject::findContour(Mat binary_image, Point2d firstPixel)
 				if (arr_i == 6) { chain_code.push_back(5); }
 				if (arr_i == 7) { chain_code.push_back(4); }
 
-				sub_contour.push_back(Point(row, colmn));
+				sub_contour.push_back(Point(colmn, row));
 				row = row + offset[arr_i][0];
 				colmn = colmn + offset[arr_i][1];
 				dir = arr_i;
