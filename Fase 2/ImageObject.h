@@ -21,11 +21,13 @@ private:
 	vector<Point> boundingBox;
 	vector<int> chainCode;
 	double bendingEnergy;
+	vector<Point> enclosedPixels;
 public:
 	vector<Point> getContour() { return contour; };
 	vector<int> getChainCode() { return chainCode; };
 	double getBendingEnergy() { return bendingEnergy; };
 	BoundingBox getBoundBox() { return bound_box; };
+	vector<Point> getenclosedPixels() { return enclosedPixels; };
 
 	/**
 	@desc	Find a contour in binary_image with a given first pixel
