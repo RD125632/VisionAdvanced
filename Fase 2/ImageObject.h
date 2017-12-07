@@ -22,12 +22,16 @@ private:
 	vector<int> chainCode;
 	double bendingEnergy;
 	vector<Point> enclosedPixels;
+	Point innerFirstPixel;
+	vector<Point> innerPixels;
 public:
 	vector<Point> getContour() { return contour; };
 	vector<int> getChainCode() { return chainCode; };
 	double getBendingEnergy() { return bendingEnergy; };
 	BoundingBox getBoundBox() { return bound_box; };
-	vector<Point> getenclosedPixels() { return enclosedPixels; };
+	vector<Point> getEnclosedPixels() { return enclosedPixels; };
+	Point getInnerFirstPixel() { return innerFirstPixel; };
+	vector<Point> getInnerPixels() { return innerPixels; };
 
 	/**
 	@desc	Find a contour in binary_image with a given first pixel
@@ -39,7 +43,7 @@ public:
 	/**
 	@desc	Find a contour in binary_image with a given first pixel
 	@param	-binary_image	Source image of the contour
-	-firstPixel		Given first pixel of an object
+			-firstPixel		Given first pixel of an object
 	*/
 	void ImageObject::findBoundingBox();
 
@@ -49,8 +53,38 @@ public:
 	void ImageObject::findBendingEnergy();
 
 	/**
+	@desc	Find first pixel of image within the contour
+	*/
+	void ImageObject::findInnerFirstPixel();
+
+	/**
+	@desc	Fill the contour gapes
+	@return	- solidContour	Output array of the solid contour
+	*/
+	vector<Point> ImageObject::getBoundaryFillContour();
+
+	/**
+	@desc	Fill inner pixels of contour
+	@param	- solidContour	Output array of the solid contour
+	*/
+	void ImageObject::findFloodFillPixels();
+
+	/**
 	@desc	Print the chaincode
 	@param	- Chaincode
 	*/
-	void ImageObject::to_string(vector<int>);
+	void ImageObject::printChainCode(vector<int>);
+
+	/**
+	@desc	Print the chaincode
+	@param	- Chaincode
+	*/
+	void ImageObject::printPixels(vector<Point> points);
+
+	/**
+	@desc	Print the chaincode
+	@param	- Chaincode
+	*/
+	void ImageObject::getPixelRange(vector<Point>, vector<int>&);
+
 };
