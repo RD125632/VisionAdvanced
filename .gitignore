@@ -332,4 +332,4 @@ __pycache__/
 # End of https://www.gitignore.io/api/c++,visualstudio
 
 *.sln
-*/64x	
+*.idb	
