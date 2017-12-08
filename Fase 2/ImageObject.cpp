@@ -98,15 +98,76 @@ void ImageObject::findBendingEnergy()
 void ImageObject::findInnerFirstPixel() {
 	// check if the direction 0 or 7 is possible to start as first inner pixel
 	Point fp = { -1, -1 };
-	if (chainCode.at(0) == 0 && chainCode.at(1) == 0 || 7) {
+	/*if (chainCode.at(0) == 0 && chainCode.at(1) == 0) {
 		fp = contour.at(0);
 		fp.x++;
 		fp.y++;
 	}
 	else {
 		cout << "Incorrect contour" << endl;
+	}*/
+	Point pixels[8] = {
+		{ 0, 1 },
+		{ 1, 1 },
+		{ 1, 0 },
+		{ 1, -1 },
+		{ 0, -1 },
+		{ -1, -1 },
+		{ -1, 0 },
+		{ -1, 1 },
+	};
+
+	for (int index = 0; index < contour.size(); index++)
+	{
+		printPixelArea(contour, contour.at(index));
+		cout << chainCode.at(index) << endl << endl;
+		Point candidatePixel = contour.at(index) + pixels[chainCode.at(index)];
+			
+		if (find(contour.begin(), contour.end(), candidatePixel) == contour.end())
+		{
+			innerFirstPixel = candidatePixel;
+			printPixelArea(contour, innerFirstPixel);
+			return;
+		}
 	}
-	innerFirstPixel = fp;
+}
+
+void ImageObject::printPixelArea(vector <Point> contourVec, Point x) {
+	// [colm][row]
+	Point pixels[9] = {
+		{ -1, -1 },
+		{ 0, -1 },
+		{ 1, -1 },
+		{ -1, 0 },
+		{ 0, 0 },
+		{ 1, 0 },
+		{ -1, 1 },
+		{ 0, 1 },
+		{ 1, 1 },
+	};
+
+
+	Point temp;
+	for (int index = 0; index < 9; index++) {
+		temp.x = x.x + pixels[index].x;
+		temp.y = x.y + pixels[index].y;
+
+
+		if (std::find(contourVec.begin(), contourVec.end(), temp) != contourVec.end()) {
+			//cout << "ja" << endl;/* v contains x */
+			cout << "1";
+		}
+		else {
+			cout << "0";
+			//cout << "nee" << endl;
+			/* v does not contain x */
+		}
+
+		if (index == 2 || index == 5 || index == 8) {
+			cout << endl;
+		}
+	}
+	cout << endl;
 }
 
 vector<Point> ImageObject::getBoundaryFillContour() {
@@ -176,18 +237,30 @@ void ImageObject::findFloodFillPixels() {
 			for (int index = 0; index < 8; index++) {
 				// position a the new pixel
 				tempPixel = fillArray.at(Cnumber).at(Tnumber) + pixels[index];
-
-				// check if the new pixel is included in the region Pixel
-				if (find(regionPixels.begin(), regionPixels.end(), tempPixel) == regionPixels.end()) {
-					tempPixels.push_back(tempPixel);
-					regionPixels.push_back(tempPixel);
-					innerPixels.push_back(tempPixel);
+				if (tempPixel.x > 0 || tempPixel.y > 0)
+				{
+					// check if the new pixel is included in the region Pixel
+					if (find(regionPixels.begin(), regionPixels.end(), tempPixel) == regionPixels.end()) {
+						tempPixels.push_back(tempPixel);
+						regionPixels.push_back(tempPixel);
+						innerPixels.push_back(tempPixel);
+					}
 				}
 			}
-			fillArray.push_back(tempPixels);
+			if (!tempPixels.empty())
+			{
+				fillArray.push_back(tempPixels);
+				//printPixels(regionPixels);
+			}
 		}
 	}
 }
+
+void ImageObject::findROIEnclosed()
+{
+	findBoundingBox();
+}
+
 
 void ImageObject::getPixelRange(vector<Point> points,vector<int>& pixelRange) {
 	//[min x][max x][min y][max y]

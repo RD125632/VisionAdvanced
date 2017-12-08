@@ -24,6 +24,7 @@ private:
 	vector<Point> enclosedPixels;
 	Point innerFirstPixel;
 	vector<Point> innerPixels;
+	void ImageObject::printPixelArea(vector <Point>, Point);
 public:
 	vector<Point> getContour() { return contour; };
 	vector<int> getChainCode() { return chainCode; };
@@ -87,4 +88,9 @@ public:
 	*/
 	void ImageObject::getPixelRange(vector<Point>, vector<int>&);
 
+	/**
+	@desc	Print the chaincode
+	@param	- Chaincode
+	*/
+	void ImageObject::findROIEnclosed();
 };
