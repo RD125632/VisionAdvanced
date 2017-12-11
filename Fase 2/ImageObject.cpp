@@ -72,11 +72,6 @@ void ImageObject::findBoundingBox()
 		else if (p.y > maxY)	{ maxY = p.y; }
 	}
 
-	//bound_box->top_left = Point(minX, minY);
-	//bound_box->top_right = Point(maxX, minY);
-	//bound_box->bottom_left = Point(minX, maxY);
-	//bound_box->bottom_right = Point(maxX, maxY);
-
 	bound_box.top_left = Point(minX, minY);
 	bound_box.top_right = Point(maxX, minY);
 	bound_box.bottom_left = Point(minX, maxY);
@@ -97,15 +92,6 @@ void ImageObject::findBendingEnergy()
 
 void ImageObject::findInnerFirstPixel() {
 	// check if the direction 0 or 7 is possible to start as first inner pixel
-	Point fp = { -1, -1 };
-	/*if (chainCode.at(0) == 0 && chainCode.at(1) == 0) {
-		fp = contour.at(0);
-		fp.x++;
-		fp.y++;
-	}
-	else {
-		cout << "Incorrect contour" << endl;
-	}*/
 	Point pixels[8] = {
 		{ 0, 1 },
 		{ 1, 1 },
