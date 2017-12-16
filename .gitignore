@@ -2,7 +2,7 @@
 *.lastbuildstate
 *.ipch
 *.db
-*idb
+*.idb
 *.VC.opendb
 *.VC.db-shm
 *.VC.db-wal

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fase 2", "Fase 2\Fase 2.vcxproj", "{00C79715-BA56-4A4E-A12A-3330FEEBF434}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fase 3 - Perceptron", "Fase 3 - Perceptron\Fase 3 - Perceptron.vcxproj", "{1A3060C2-8BE0-40A6-92AE-38F5144DE4BF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fase 3 - Neural Network", "Fase 3 - Neural Network\Fase 3 - Neural Network.vcxproj", "{EB287711-C7CB-491F-89CD-FB1D25E60B8F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fase 3 - Figure Neural Network", "Fase 3 - Figure Neural Network\Fase 3 - Figure Neural Network.vcxproj", "{49B1F576-93D8-4F2D-80D6-F389AC06E713}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{EB287711-C7CB-491F-89CD-FB1D25E60B8F}.Release|x64.Build.0 = Release|x64
 		{EB287711-C7CB-491F-89CD-FB1D25E60B8F}.Release|x86.ActiveCfg = Release|Win32
 		{EB287711-C7CB-491F-89CD-FB1D25E60B8F}.Release|x86.Build.0 = Release|Win32
+		{49B1F576-93D8-4F2D-80D6-F389AC06E713}.Debug|x64.ActiveCfg = Debug|x64
+		{49B1F576-93D8-4F2D-80D6-F389AC06E713}.Debug|x64.Build.0 = Debug|x64
+		{49B1F576-93D8-4F2D-80D6-F389AC06E713}.Debug|x86.ActiveCfg = Debug|Win32
+		{49B1F576-93D8-4F2D-80D6-F389AC06E713}.Debug|x86.Build.0 = Debug|Win32
+		{49B1F576-93D8-4F2D-80D6-F389AC06E713}.Release|x64.ActiveCfg = Release|x64
+		{49B1F576-93D8-4F2D-80D6-F389AC06E713}.Release|x64.Build.0 = Release|x64
+		{49B1F576-93D8-4F2D-80D6-F389AC06E713}.Release|x86.ActiveCfg = Release|Win32
+		{49B1F576-93D8-4F2D-80D6-F389AC06E713}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
