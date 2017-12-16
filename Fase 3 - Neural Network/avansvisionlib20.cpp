@@ -780,30 +780,48 @@ int labelBLOBsInfo(Mat binaryImage, Mat & labeledImage,
 //   8		 1.0	0.56  -0.2   0.12  0.56  1.0  1.0
 
 void loadTrainingSet1(Mat & ITset, Mat & OTset) {
+	int trainingset = 1;
+	if (trainingset == 0) {
+		// input of trainingset
+		// remark: nummber of columns == number of inputneurons of the BPN
+		ITset = (Mat_<double>(8, 5) <<
+			1, 0.4, -0.7, 0.1, 0.71,
+			1, 0.3, -0.5, 0.05, 0.34,
+			1, 0.6, 0.1, 0.3, 0.12,
+			1, 0.2, 0.4, 0.25, 0.34,
+			1, -0.2, 0.12, 0.56, 1.0,
+			1, 0.1, -0.34, 0.12, 0.56,
+			1, 0.6, 0.12, 0.56, 1.0,
+			1, 0.56, -0.2, 0.12, 0.56);
 
-	// input of trainingset
-	// remark: nummber of columns == number of inputneurons of the BPN
-	ITset = (Mat_<double>(8, 5) <<
-		1, 0.4, -0.7, 0.1, 0.71,
-		1, 0.3, -0.5, 0.05, 0.34,
-		1, 0.6, 0.1, 0.3, 0.12,
-		1, 0.2, 0.4, 0.25, 0.34,
-		1, -0.2, 0.12, 0.56, 1.0,
-		1, 0.1, -0.34, 0.12, 0.56,
-		1, 0.6, 0.12, 0.56, 1.0,
-		1, 0.56, -0.2, 0.12, 0.56);
+		// output of trainingset
+		// remark: nummber of columns == number of outputneurons of the BPN
+		OTset = (Mat_<double>(8, 2) <<
+			0, 0,
+			0, 0,
+			0, 1,
+			0, 1,
+			1, 0,
+			1, 0,
+			1, 1,
+			1, 1);
+	}else{
+		// input of trainingset
+		// remark: nummber of columns == number of inputneurons of the BPN
+		ITset = (Mat_<double>(4, 5) <<
+			1, 0.4, -0.7, 0.1, 0.71,
+			1, 0.3, -0.5, 0.05, 0.34,
+			1, 0.6, 0.1, 0.3, 0.12,
+			1, 0.2, 0.4, 0.25, 0.34);
 
-	// output of trainingset
-	// remark: nummber of columns == number of outputneurons of the BPN
-	OTset = (Mat_<double>(8, 2) <<
-		0, 0,
-		0, 0,
-		0, 1,
-		0, 1,
-		1, 0,
-		1, 0,
-		1, 1,
-		1, 1);
+		// output of trainingset
+		// remark: nummber of columns == number of outputneurons of the BPN
+		OTset = (Mat_<double>(4, 2) <<
+			1, 0,
+			0, 1,
+			0, 1,
+			1, 0);
+	}
 } // loadTestTrainingSet1
 
 
@@ -930,8 +948,12 @@ void calculateOutputHiddenLayer(Mat II, Mat V, Mat & OH) {
 	// STEP4: Calculate output of the hiddenlayer, i.e. OH(i) = 1/(1+EXP(-IH(i)))   
 	int hiddenNeurons = V.cols;
 	OH = Mat_<double>(hiddenNeurons, 1);
-	for (int row = 0; row < hiddenNeurons; row++)
+	for (int row = 0; row < hiddenNeurons; row++) {
+		//cout << "Input HN = " << getEntry(IH, row, 0) << endl;
 		setEntry(OH, row, 0, 1 / (1 + exp(-getEntry(IH, row, 0))));
+		//cout << "Output HN = " << getEntry(OH, row, 0) << endl << endl;
+
+	}
 
 } // calculateOutputHiddenLayer
 
@@ -947,9 +969,11 @@ void calculateOutputBPN(Mat OH, Mat W, Mat & OO) {
 	// STEP6: Calculate output of the outputlayer, i.e. OO(i) = 1/(1+EXP(-IO(i)))
 	int outputNeurons = W.cols;
 	OO = Mat_<double>(outputNeurons, 1);
-	for (int row = 0; row < outputNeurons; row++)
+	for (int row = 0; row < outputNeurons; row++){
+		//cout << "Input BPN = " << getEntry(IO, row, 0) << endl;
 		setEntry(OO, row, 0, 1 / (1 + exp(-getEntry(IO, row, 0))));
-
+		//cout << "Output BPN = " << getEntry(OO, row, 0) << endl << endl;
+	}
 } // calculateOutputBPN
 
 

@@ -33,7 +33,7 @@ int main(int argc, char** argv)
 	// default number of hiddenNeurons. The definite number is user input  
 	// inputNeurons and outputNeurons are implicitly determined via
 	// the trainingset, i.e.: inputNeurons = ITset.cols ; outputNeurons = OTset.cols;
-	int hiddenNeurons = 2;
+	int hiddenNeurons = 4;
 
 	cout << endl << "Load testtrainingset..." << endl << endl;
 	loadTrainingSet1(ITset, OTset);
@@ -48,7 +48,7 @@ int main(int argc, char** argv)
 		"BPN Inputlayer  = " << ITset.cols << "  neurons" << endl <<
 		"BPN Outputlayer = " << OTset.cols << "  neurons" << endl << endl;
 	cout << "Please choose a number of hidden neurons: ";
-	cin >> hiddenNeurons;
+	//cin >> hiddenNeurons;
 	cout << "Thank you!" << endl << endl << endl;
 
 	cout << "Initialize BPN ..." << endl;
@@ -58,10 +58,10 @@ int main(int argc, char** argv)
 	cout << "initial values of weight matrices V0 and W0" << endl;
 	cout << "*******************************************" << endl;
 	cout << V0 << endl << endl << W0 << endl << endl;
-	cout << "Press ENTER => ";
+	cout << "Press ENTER => " << endl;
 	string dummy;
-	getline(cin, dummy);
-	getline(cin, dummy);
+	//getline(cin, dummy);
+	//getline(cin, dummy);
 
 	// IT: current training input of the inputlayer 
 	// OT: desired training output of the BPN
@@ -145,6 +145,12 @@ int main(int argc, char** argv)
 		cout << endl;
 	}
 
+
+
+
+
+	cout << V0 << endl <<endl;
+	cout << W0 << endl << endl;
 	cout << endl << endl << "Press ENTER for exit";
 	getline(cin, dummy);
 	getline(cin, dummy);
