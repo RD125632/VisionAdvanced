@@ -27,7 +27,7 @@ public:
 	void createBPNInput(vector<double>, Mat &);
 	void initializeBPN(int, int, int, Mat &, Mat &, Mat &, Mat &);
 	void train(vector<vector<ImageObject>> &, Mat&, Mat&);
-	void sortImage(vector<double>, Mat, Mat);
+	void evaluateImage(vector<double>, Mat, Mat, Mat&);
 };
 
 
