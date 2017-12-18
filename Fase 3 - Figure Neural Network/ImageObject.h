@@ -29,10 +29,10 @@ public:
 	BoundingBox getBoundBox() { return bound_box; };
 	Mat getImage() { return image; }
 	
-	ImageObject(Mat);
-	ImageObject(Mat, Point2d);
-	void calculateContour(Mat);	
-	void calculateContour(Mat, Point2d);
+	ImageObject(Mat,int);
+	void calculateContourImage(Mat);
+	void calculateContourObject(Mat);
+	void findRotatedBoundingBox();
 	/**
 	@desc	Find a contour in binary_image with a given first pixel
 	@param	-binary_image	Source image of the contour
@@ -46,6 +46,6 @@ public:
 			-firstPixel		Given first pixel of an object
 	*/
 	void findBoundingBox();
-
+	Mat rotate(Mat, double);
 };
 

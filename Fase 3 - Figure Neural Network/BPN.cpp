@@ -24,7 +24,7 @@ void Figure_BPN::loadTrainingFigures(vector<string> &figureSets, vector<vector<I
 			Mat binary16S_image;
 			binary_image.convertTo(binary16S_image, CV_16S);
 
-			ImageObject IO = ImageObject(binary16S_image);
+			ImageObject IO = ImageObject(binary16S_image,0);
 			figures.push_back(IO);
 		}
 		trainingImages.push_back(figures);
