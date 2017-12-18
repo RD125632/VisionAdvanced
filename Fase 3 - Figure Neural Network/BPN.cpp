@@ -105,6 +105,28 @@ void Figure_BPN::createBPNInput(vector<vector<ImageObject>> trainingImages, Mat 
 	trainingSet = ITset;
 }
 
+void Figure_BPN::createBPNInput(vector<double> chainCode, Mat &trainingSet) {
+
+	Mat ITset = Mat_<double>(9, 1);
+	ITset.at<double>(0, 0) = 1;
+
+	vector<double> plottedChainCode;
+		
+	for (int b = 0; b < 8; b++)
+	{
+		plottedChainCode.push_back(count(chainCode.begin(), chainCode.end(), b));
+	}
+
+	int max = distance(plottedChainCode.begin(), max_element(plottedChainCode.begin(), plottedChainCode.end()));
+	double maxV = plottedChainCode.at(max);
+
+	for (int c = 0; c < 8; c++)
+	{
+		ITset.at<double>(c+1, 0) = plottedChainCode.at(c) / maxV;
+	}
+	trainingSet = ITset;
+}
+
 // func: Initialization of the (1) weigthmatrices V0 and W0 and (2) of the delta matrices dV0 and dW0. 
 // pre: inputNeurons, hiddenNeurons and outputNeurons define the Neural Network. 
 //      From this numbers the dimensions of the weightmatrices can be determined.
@@ -233,7 +255,26 @@ void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages, Mat& V0, Mat
 	cout << W0 << endl << endl;
 }
 
-void Figure_BPN::sortImage(vector<int> sortChaincode, Mat V0, Mat W0) {
+void Figure_BPN::sortImage(vector<double> sortChaincode, Mat V0, Mat W0) {
+	Mat IT;
+	Mat OH;
+	Mat OO;
+	createBPNInput(sortChaincode, IT);
+
+	//IT = transpose(getRow(ITS, inputSetRowNr));
+
+	//OT = transpose(getRow(OTS, inputSetRowNr));
+
+
+
+
+	calculateOutputHiddenLayer(IT, V0, OH);
+
+	calculateOutputBPN(OH, W0, OO);
+	cout << endl << endl;
+	cout << "Output object = " << endl;
+	cout << OO << endl;
+	cout << endl << endl;
 
 
 }

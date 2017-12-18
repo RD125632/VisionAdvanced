@@ -24,9 +24,10 @@ public:
 	void loadTrainingFigures(vector<string> &, vector<vector<ImageObject>> &);
 	void createBPNOutput(int, Mat &);
 	void createBPNInput(vector<vector<ImageObject>>, Mat &);
+	void createBPNInput(vector<double>, Mat &);
 	void initializeBPN(int, int, int, Mat &, Mat &, Mat &, Mat &);
 	void train(vector<vector<ImageObject>> &, Mat&, Mat&);
-	void sortImage(vector<int>, Mat, Mat);
+	void sortImage(vector<double>, Mat, Mat);
 };
 
 
