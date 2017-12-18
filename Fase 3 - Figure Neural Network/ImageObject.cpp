@@ -24,6 +24,18 @@ void ImageObject::calculateContour (Mat binary_image)
 	}
 }
 
+
+ImageObject::ImageObject(Mat i, Point2d fp)
+{
+	image = i;
+	calculateContour(image, fp);
+}
+
+void ImageObject::calculateContour(Mat binary_image, Point2d fp)
+{
+	findContour(binary_image, fp);
+}
+
 void ImageObject::findContour(Mat binary_image, Point2d firstPixel)
 {
 	int row = firstPixel.x;

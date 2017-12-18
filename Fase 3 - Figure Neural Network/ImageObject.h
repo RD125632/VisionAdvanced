@@ -30,8 +30,9 @@ public:
 	Mat getImage() { return image; }
 	
 	ImageObject(Mat);
-	
-	void calculateContour(Mat);
+	ImageObject(Mat, Point2d);
+	void calculateContour(Mat);	
+	void calculateContour(Mat, Point2d);
 	/**
 	@desc	Find a contour in binary_image with a given first pixel
 	@param	-binary_image	Source image of the contour
@@ -45,4 +46,6 @@ public:
 			-firstPixel		Given first pixel of an object
 	*/
 	void findBoundingBox();
+
 };
+

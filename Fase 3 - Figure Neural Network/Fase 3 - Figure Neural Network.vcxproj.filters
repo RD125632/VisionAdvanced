@@ -30,9 +30,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="avansvisionlib20.h">
-      <Filter>Source Files\libs</Filter>
-    </ClInclude>
     <ClInclude Include="ImageObject.h">
       <Filter>Source Files\objects</Filter>
     </ClInclude>
@@ -41,6 +38,9 @@
     </ClInclude>
     <ClInclude Include="UnitTest.h">
       <Filter>Source Files\test</Filter>
+    </ClInclude>
+    <ClInclude Include="avansvisionlib20.h">
+      <Filter>Source Files\libs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
