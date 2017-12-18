@@ -255,26 +255,13 @@ void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages, Mat& V0, Mat
 	cout << W0 << endl << endl;
 }
 
-void Figure_BPN::sortImage(vector<double> sortChaincode, Mat V0, Mat W0) {
+void Figure_BPN::evaluateImage(vector<double> sortChaincode, Mat V0, Mat W0, Mat& evaluation) {
 	Mat IT;
 	Mat OH;
 	Mat OO;
 	createBPNInput(sortChaincode, IT);
-
-	//IT = transpose(getRow(ITS, inputSetRowNr));
-
-	//OT = transpose(getRow(OTS, inputSetRowNr));
-
-
-
-
 	calculateOutputHiddenLayer(IT, V0, OH);
-
 	calculateOutputBPN(OH, W0, OO);
-	cout << endl << endl;
-	cout << "Output object = " << endl;
-	cout << OO << endl;
-	cout << endl << endl;
 
-
+	evaluation = OO;
 }
