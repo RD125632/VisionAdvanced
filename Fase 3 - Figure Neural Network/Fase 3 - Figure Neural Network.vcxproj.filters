@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\libs">
+      <UniqueIdentifier>{0a3c177c-b491-4880-86aa-6cfff99bf503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\objects">
+      <UniqueIdentifier>{e59a7371-5edd-4dde-9067-d617aaa2d778}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -21,11 +27,14 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ImageObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="avansvisionlib20.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageObject.h">
+      <Filter>Source Files\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BPN.h">
+      <Filter>Source Files\objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -35,11 +44,14 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImageObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="avansvisionlib20.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageObject.cpp">
+      <Filter>Source Files\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BPN.cpp">
+      <Filter>Source Files\objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,6 +2,28 @@
 #include "ImageObject.h"
 
 
+ImageObject::ImageObject(Mat i)
+{
+	image = i;
+	calculateContour(image);
+}
+
+void ImageObject::calculateContour (Mat binary_image)
+{
+	Mat labeled_image;
+	// Get blob info
+	vector<Point2d *> firstPixels;
+	vector<Point2d *> posVec;
+	vector<int> areaVec;
+	labelBLOBsInfo(binary_image, labeled_image, firstPixels, posVec, areaVec);
+
+	// Find contour
+	for (Point2d* firstPixel : firstPixels)
+	{
+		findContour(binary_image, Point2d(firstPixel->x, firstPixel->y));
+	}
+}
+
 void ImageObject::findContour(Mat binary_image, Point2d firstPixel)
 {
 	int row = firstPixel.x;

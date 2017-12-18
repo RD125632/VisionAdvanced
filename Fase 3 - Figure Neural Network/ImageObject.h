@@ -3,7 +3,9 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
+
 #include "stdafx.h"
+#include "avansvisionlib20.h"
 
 using namespace std;
 using namespace cv;
@@ -20,11 +22,16 @@ private:
 	vector<Point> contour;
 	vector<Point> boundingBox;
 	vector<double> chainCode;
+	Mat image;
 public:
 	vector<Point> getContour() { return contour; };
 	vector<double> getChainCode() { return chainCode; };
 	BoundingBox getBoundBox() { return bound_box; };
-
+	Mat getImage() { return image; }
+	
+	ImageObject(Mat);
+	
+	void calculateContour(Mat);
 	/**
 	@desc	Find a contour in binary_image with a given first pixel
 	@param	-binary_image	Source image of the contour
@@ -38,6 +45,4 @@ public:
 			-firstPixel		Given first pixel of an object
 	*/
 	void findBoundingBox();
-
-
 };
