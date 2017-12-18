@@ -37,17 +37,38 @@ void Figure_BPN::createBPNOutput(int type, Mat &OTset)
 	switch (type) {
 
 	case 0:
-		OTset = (Mat_<double>(10, 3) <<
-			1, 1, 1,
+		// Cirkel | Vierkant | Driehoek
+		OTset = (Mat_<double>(30, 3) <<
 			1, 0, 0,
-			1, 1, 1,
 			1, 0, 0,
-			1, 1, 1,
 			1, 0, 0,
-			1, 1, 1,
 			1, 0, 0,
-			1, 1, 0,
-			1, 0, 1);
+			1, 0, 0,
+			1, 0, 0,
+			1, 0, 0,
+			1, 0, 0,
+			1, 0, 0,
+			1, 0, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 1, 0,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1);
 		break;
 	}
 }
@@ -104,11 +125,11 @@ void Figure_BPN::initializeBPN(int inputNeurons, int hiddenNeurons, int outputNe
 	setValue(dW0, 0);
 } // initializeBPN
 
-void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages)
+void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages, Mat& V0, Mat& W0)
 {
 	// V0, W0   : weightfactor matrices
 	// dV0, dW0 : weightfactor correction matrices
-	Mat V0, W0, dW0, dV0;
+	Mat dW0, dV0;
 
 	// default number of hiddenNeurons. The definite number is user input  
 	// inputNeurons and outputNeurons are implicitly determined via
@@ -171,16 +192,19 @@ void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages)
 	// druk voor elke input vector uit de trainingset de output vector uit trainingset af 
 	// tezamen met de output vector die het getrainde BPN (zie V0, W0) genereerd bij de 
 	// betreffende input vector.
-	cout << setw(16) << " " << "Training Input" << setw(12) << "|" << " Expected Output "
-		<< setw(1) << "|" << " Output BPN " << setw(6) << "|" << endl << endl;
+	cout << setw(10) << " Training Input" << setw(12) << "|" << " Expected Output "<< setw(1) << "|" << " Output BPN " << setw(6) << "|" << endl << endl;
+
+	
 	for (int row = 0; row < ITS.rows; row++) {
 
 		// haal volgende inputvector op uit de training set
 		inputVectorTrainingSet = transpose(getRow(ITS, row));
 
 		// druk de inputvector af in een regel afgesloten met | 
-		for (int r = 0; r < inputVectorTrainingSet.rows; r++)
-			cout << setw(8) << getEntry(inputVectorTrainingSet, r, 0);
+		for (int r = 0; r < inputVectorTrainingSet.rows; r++) {
+			cout << setw(10) << getEntry(inputVectorTrainingSet, r, 0);
+		}
+			
 		cout << setw(2) << "|";
 
 		// haal bijbehorende outputvector op uit de training set
@@ -195,10 +219,21 @@ void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages)
 		// bij de inputvector uit de trainingset  
 		outputVectorBPN = BPN(inputVectorTrainingSet, V0, W0);
 
-		// druk de output vector van het BPN af in dezelfde regel afgesloten met |
+		// druk de output vector van het BPN af in dezelfde regel afgesloten met |--
 		for (int r = 0; r < outputVectorBPN.rows; r++)
 			cout << setw(8) << round(getEntry(outputVectorBPN, r, 0));
 		cout << setw(2) << "|";
 		cout << endl;
 	}
+
+	cout << endl << endl;
+	cout << "V0" << endl;
+	cout << V0 << endl << endl;
+	cout << "W0" << endl << endl;
+	cout << W0 << endl << endl;
+}
+
+void Figure_BPN::sortImage(vector<int> sortChaincode, Mat V0, Mat W0) {
+
+
 }
