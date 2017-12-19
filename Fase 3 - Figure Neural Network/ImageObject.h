@@ -11,28 +11,27 @@ using namespace std;
 using namespace cv;
 
 class ImageObject {
-	struct BoundingBox {
-		Point top_left;
-		Point top_right;
-		Point bottom_left;
-		Point bottom_right;
-	};
+
 private:
-	BoundingBox bound_box;
 	vector<Point> contour;
-	vector<Point> boundingBox;
 	vector<double> chainCode;
 	Mat image;
+	Point2f boundingBox[4];
+	Size size;
+	double surface, outline;
 public:
+	Point2f* getBoundingBox() { return boundingBox; };
+	Size getSize() { return size; };
 	vector<Point> getContour() { return contour; };
 	vector<double> getChainCode() { return chainCode; };
-	BoundingBox getBoundBox() { return bound_box; };
 	Mat getImage() { return image; }
 	
 	ImageObject(Mat,int);
 	void calculateContourImage(Mat);
 	void calculateContourObject(Mat);
+	void calculateGeometry(Mat&);
 	void findRotatedBoundingBox();
+	
 	/**
 	@desc	Find a contour in binary_image with a given first pixel
 	@param	-binary_image	Source image of the contour

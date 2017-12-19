@@ -7,7 +7,6 @@
 ImageObject::ImageObject(Mat i, int type)
 {
 	image = i;
-	findRotatedBoundingBox();
 
 	switch (type)
 	{
@@ -16,9 +15,50 @@ ImageObject::ImageObject(Mat i, int type)
 		break;
 	case 1:
 		calculateContourObject(i);
+		findRotatedBoundingBox();
+		calculateContourObject(i);
 		break;
 	}
-	
+}
+
+void ImageObject::calculateGeometry(Mat& evaluation)
+{
+	Point2f A = boundingBox[0];
+	Point2f B = boundingBox[1];
+	Point2f D = boundingBox[3];
+
+	double AB = sqrt(pow(abs(A.x - B.x), 2) + pow(abs(A.y - B.y), 2));
+	double AD = sqrt(pow(abs(A.x - D.x), 2) + pow(abs(A.y - D.y), 2));
+
+	if (AB > AD)
+	{
+		size = Size(AB, AD);
+	}
+	else
+	{
+		size = Size(AD, AB);
+	}
+	cout << size << endl;
+
+	Point min_loc, max_loc;
+	double min, max;
+	minMaxLoc(evaluation, &min, &max, &min_loc, &max_loc);
+
+	switch (max_loc.y)
+	{
+	case 0:
+		//Cirkel
+		surface = (atan(1) * 4) * size.height * size.width;
+		break;
+	case 1:
+		//Rechthoek
+		surface = size.height * size.width;
+		break;
+	case 2:
+		//Driehoek
+		surface = (size.height * size.width) / 2;
+		break;
+	}
 }
 
 void ImageObject::calculateContourImage (Mat binary_image)
@@ -108,30 +148,13 @@ void ImageObject::findContour(Mat binary_image, Point2d firstPixel)
 	chainCode = chain_code;
 }
 
-void ImageObject::findBoundingBox()
-{
-	int minX = 100000, minY = 100000, maxX = 0, maxY = 0;
-
-	for (Point p : contour)
-	{
-		if (p.x < minX) { minX = p.x; }
-		else if (p.x > maxX) { maxX = p.x; }
-		if (p.y < minY) { minY = p.y; }
-		else if (p.y > maxY) { maxY = p.y; }
-	}
-
-	bound_box.top_left = Point(minX, minY);
-	bound_box.top_right = Point(maxX, minY);
-	bound_box.bottom_left = Point(minX, maxY);
-	bound_box.bottom_right = Point(maxX, maxY);
-}
-
 void ImageObject::findRotatedBoundingBox()
 {
 	// Find the rotated rectangles for each contour
 	RotatedRect minRect(minAreaRect(contour));
 	vector<vector<Point>> test;
 	test.push_back(contour);
+
 	// Draw contours + rotated rects
 	Mat drawing = Mat::zeros(image.size(), CV_8UC3);
 	Mat dst = Mat::zeros(image.size(), CV_8UC3);
@@ -143,31 +166,19 @@ void ImageObject::findRotatedBoundingBox()
 		drawContours(drawing, test, i, color, 1, 8, vector<Vec4i>(), 0, Point());
 
 		// rotated rectangle
-		Point2f rect_points[4];
-		minRect.points(rect_points);
+		minRect.points(boundingBox);
 		for (int j = 0; j < 4; j++)
-			line(drawing, rect_points[j], rect_points[(j + 1) % 4], color, 1, 8);
+			line(drawing, boundingBox[j], boundingBox[(j + 1) % 4], color, 1, 8);
 
-		Point2d B, D, E;
-		B = rect_points[1];
-		D = rect_points[0];
-		E = Point2d(D.y, B.x);
+		//imshow("Before Rotation", drawing);
+		//waitKey(1);
 
-		float BD = sqrt(pow(2, (B.x - D.x)) + pow(2, (B.y - D.y)));
-		float ED = sqrt(pow(2, (E.x - D.x)) + pow(2, (E.y - D.y)));
-
-		float angle = (cos(ED/BD) * (180.0 / (atan(1) * 4)));
-		cout << angle;
-
-		imshow("Before Rotation", drawing);
-		waitKey(1);
-
-		dst = rotate(drawing, angle);
+		dst = rotate(drawing, minRect.angle);
 		image = dst;
 	}
 
-	imshow("After Rotation", dst);
-	waitKey(1);
+	//imshow("After Rotation", dst);
+	//waitKey(1);
 }
 
 Mat ImageObject::rotate(Mat src, double angle)
