@@ -29,6 +29,13 @@ void ImageObject::calculateGeometry(Mat& evaluation)
 
 	double AB = sqrt(pow(abs(A.x - B.x), 2) + pow(abs(A.y - B.y), 2));
 	double AD = sqrt(pow(abs(A.x - D.x), 2) + pow(abs(A.y - D.y), 2));
+	Point min_loc, max_loc;
+	double min, max;
+	int Offset = 20;
+	equalSize = true;
+
+	minMaxLoc(evaluation, &min, &max, &min_loc, &max_loc);
+	
 
 	if (AB > AD)
 	{
@@ -40,23 +47,31 @@ void ImageObject::calculateGeometry(Mat& evaluation)
 	}
 	cout << size << endl;
 
-	Point min_loc, max_loc;
-	double min, max;
-	minMaxLoc(evaluation, &min, &max, &min_loc, &max_loc);
+
+
 
 	switch (max_loc.y)
 	{
 	case 0:
 		//Cirkel
 		surface = (atan(1) * 4) * size.height * size.width;
+		if ((surface - Offset) < (atan(1) * 4) * size.height * size.height || (surface + Offset) > (atan(1) * 4) * size.height * size.height)
+		{
+			equalSize = false;
+		}
 		break;
 	case 1:
-		//Rechthoek
+		//Vierkant
 		surface = size.height * size.width;
+		if ((surface - Offset) < pow(size.height, 2) || (surface + Offset) > pow(size.height, 2))
+		{
+			equalSize = false;
+		}
 		break;
 	case 2:
 		//Driehoek
 		surface = (size.height * size.width) / 2;
+		equalSize = false;
 		break;
 	}
 }

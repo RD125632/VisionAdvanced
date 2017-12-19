@@ -17,9 +17,12 @@ private:
 	vector<double> chainCode;
 	Mat image;
 	Point2f boundingBox[4];
+	bool equalSize;
 	Size size;
-	double surface, outline;
+	double surface;
 public:
+	double getSurface() { return surface; };
+	bool getEquality() { return equalSize; };
 	Point2f* getBoundingBox() { return boundingBox; };
 	Size getSize() { return size; };
 	vector<Point> getContour() { return contour; };

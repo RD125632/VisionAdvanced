@@ -25,9 +25,11 @@ public:
 	void createBPNOutput(int, Mat &);
 	void createBPNInput(vector<vector<ImageObject>>, Mat &);
 	void createBPNInput(vector<double>, Mat &);
+	void createBPNInput(ImageObject IO, Mat&, Mat &);
 	void initializeBPN(int, int, int, Mat &, Mat &, Mat &, Mat &);
-	void train(vector<vector<ImageObject>> &, Mat&, Mat&);
+	void train(vector<vector<ImageObject>> &, Mat&, Mat&, int nr);
 	void evaluateImage(vector<double>, Mat, Mat, Mat&);
+	void evaluateAdvImage(ImageObject, Mat, Mat, Mat&);
 };
 
 
