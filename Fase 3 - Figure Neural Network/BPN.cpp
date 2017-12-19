@@ -37,45 +37,96 @@ void Figure_BPN::createBPNOutput(int type, Mat &OTset)
 	switch (type) {
 
 	case 0:
-		// Cirkel | Vierkant | Driehoek
-		OTset = (Mat_<double>(30, 3) <<
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1);
+		OTset = (Mat_<double>(80, 8) <<
+			1, 0, 0, 0, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 0, 0, //Cirkel
+			0, 1, 0, 0, 0, 0, 0, 0,
+			0, 1, 0, 0, 0, 0, 0, 0,
+			0, 1, 0, 0, 0, 0, 0, 0,
+			0, 1, 0, 0, 0, 0, 0, 0,
+			0, 1, 0, 0, 0, 0, 0, 0,
+			0, 1, 0, 0, 0, 0, 0, 0,
+			0, 1, 0, 0, 0, 0, 0, 0,
+			0, 1, 0, 0, 0, 0, 0, 0,
+			0, 1, 0, 0, 0, 0, 0, 0,
+			0, 1, 0, 0, 0, 0, 0, 0, //Vierkant
+			0, 0, 1, 0, 0, 0, 0, 0, 
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0, //Driehoek
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0, //Hart
+			0, 0, 0, 0, 1, 0, 0, 0,
+			0, 0, 0, 0, 1, 0, 0, 0,
+			0, 0, 0, 0, 1, 0, 0, 0,
+			0, 0, 0, 0, 1, 0, 0, 0,
+			0, 0, 0, 0, 1, 0, 0, 0,
+			0, 0, 0, 0, 1, 0, 0, 0,
+			0, 0, 0, 0, 1, 0, 0, 0,
+			0, 0, 0, 0, 1, 0, 0, 0,
+			0, 0, 0, 0, 1, 0, 0, 0,
+			0, 0, 0, 0, 1, 0, 0, 0, //Penta
+			0, 0, 0, 0, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 1, 0, 0, //Pijl
+			0, 0, 0, 0, 0, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 1, 0, //Rechthoek
+			0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 1,
+			0, 0, 0, 0, 0, 0, 0, 1); // Ster
 		break;
 	}
 }
 
 void Figure_BPN::createBPNInput(vector<vector<ImageObject>> trainingImages, Mat &trainingSet) {
 
-	Mat ITset = Mat_<double>(30, 9);
+	//Mat ITset = Mat_<double>(30, 9);
+	Mat ITset = Mat_<double>(80, 9);
+
 
 	int counter = 0;
 	for (int o = 0; o < trainingImages.size(); o++)
@@ -105,8 +156,8 @@ void Figure_BPN::createBPNInput(vector<vector<ImageObject>> trainingImages, Mat 
 	trainingSet = ITset;
 }
 
-void Figure_BPN::createBPNInput(vector<double> chainCode, Mat &trainingSet) {
-
+void Figure_BPN::createBPNInput(vector<double> chainCode, Mat &trainingSet) 
+{
 	Mat ITset = Mat_<double>(9, 1);
 	ITset.at<double>(0, 0) = 1;
 
@@ -156,7 +207,7 @@ void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages, Mat& V0, Mat
 	// default number of hiddenNeurons. The definite number is user input  
 	// inputNeurons and outputNeurons are implicitly determined via
 	// the trainingset, i.e.: inputNeurons = ITset.cols ; outputNeurons = OTset.cols;
-	int hiddenNeurons = 4;
+	int hiddenNeurons = 5;
 
 	//cout << m << endl << endl;
 	Mat ITS, OTS;
