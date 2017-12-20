@@ -21,7 +21,7 @@ void UnitTest::loadTestFigures(vector<ImageObject> &testImages)
 			Mat binary16S_image;
 			binary_image.convertTo(binary16S_image, CV_16S);
 
-			ImageObject IO = ImageObject(binary16S_image);
+			ImageObject IO = ImageObject(binary16S_image,0);
 			testImages.push_back(IO);
 		}
 }

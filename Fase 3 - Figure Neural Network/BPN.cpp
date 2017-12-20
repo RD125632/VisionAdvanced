@@ -24,7 +24,7 @@ void Figure_BPN::loadTrainingFigures(vector<string> &figureSets, vector<vector<I
 			Mat binary16S_image;
 			binary_image.convertTo(binary16S_image, CV_16S);
 
-			ImageObject IO = ImageObject(binary16S_image);
+			ImageObject IO = ImageObject(binary16S_image,0);
 			figures.push_back(IO);
 		}
 		trainingImages.push_back(figures);
@@ -35,9 +35,7 @@ void Figure_BPN::loadTrainingFigures(vector<string> &figureSets, vector<vector<I
 void Figure_BPN::createBPNOutput(int type, Mat &OTset)
 {
 	switch (type) {
-
 	case 0:
-		// Cirkel | Vierkant | Driehoek
 		OTset = (Mat_<double>(30, 3) <<
 			1, 0, 0,
 			1, 0, 0,
@@ -45,23 +43,23 @@ void Figure_BPN::createBPNOutput(int type, Mat &OTset)
 			1, 0, 0,
 			1, 0, 0,
 			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
+			1, 0, 0, 
+			1, 0, 0, 
+			1, 0, 0, 
+			1, 0, 0, //Cirkel
+			0, 1, 0, 
 			0, 1, 0,
 			0, 1, 0,
 			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
+			0, 1, 0, 
+			0, 1, 0, 
+			0, 1, 0, 
+			0, 1, 0, 
+			0, 1, 0, 
+			0, 1, 0,  //Vierkant
+			0, 0, 1, 
+			0, 0, 1, 
+			0, 0, 1, 
 			0, 0, 1,
 			0, 0, 1,
 			0, 0, 1,
@@ -70,12 +68,97 @@ void Figure_BPN::createBPNOutput(int type, Mat &OTset)
 			0, 0, 1,
 			0, 0, 1);
 		break;
+	case 1:
+		OTset = (Mat_<double>(80, 7) <<
+			1, 0, 0, 0, 0, 0, 0, 1,
+			1, 0, 0, 0, 0, 0, 0, 1,
+			1, 0, 0, 0, 0, 0, 0, 1,
+			1, 0, 0, 0, 0, 0, 0, 1,
+			1, 0, 0, 0, 0, 0, 0, 1,
+			1, 0, 0, 0, 0, 0, 0, 1,
+			1, 0, 0, 0, 0, 0, 0, 1,
+			1, 0, 0, 0, 0, 0, 0, 1,
+			1, 0, 0, 0, 0, 0, 0, 1,
+			1, 0, 0, 0, 0, 0, 0, 1, //Cirkel
+			0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 0, 0, 0, 0, 0, 1, //Vierkant
+			0, 0, 1, 0, 0, 0, 0, 0, 
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0, //Driehoek
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0,
+			0, 0, 0, 1, 0, 0, 0, 0, //Hart
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, //Penta
+			0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 1, 1, 0, 1, 0, 0, //Pijl
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0,
+			0, 0, 1, 0, 0, 0, 0, 0, //Rechthoek
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0); // Ster
+		break;
 	}
 }
 
 void Figure_BPN::createBPNInput(vector<vector<ImageObject>> trainingImages, Mat &trainingSet) {
 
-	Mat ITset = Mat_<double>(30, 9);
+	//Mat ITset = Mat_<double>(30, 9);
+	Mat ITset = Mat_<double>(80, 9);
+
 
 	int counter = 0;
 	for (int o = 0; o < trainingImages.size(); o++)
@@ -105,8 +188,8 @@ void Figure_BPN::createBPNInput(vector<vector<ImageObject>> trainingImages, Mat 
 	trainingSet = ITset;
 }
 
-void Figure_BPN::createBPNInput(vector<double> chainCode, Mat &trainingSet) {
-
+void Figure_BPN::createBPNInput(vector<double> chainCode, Mat &trainingSet) 
+{
 	Mat ITset = Mat_<double>(9, 1);
 	ITset.at<double>(0, 0) = 1;
 
@@ -125,6 +208,23 @@ void Figure_BPN::createBPNInput(vector<double> chainCode, Mat &trainingSet) {
 		ITset.at<double>(c+1, 0) = plottedChainCode.at(c) / maxV;
 	}
 	trainingSet = ITset;
+}
+
+void Figure_BPN::createBPNInput(ImageObject IO, Mat& evaluation, Mat &trainingSet)
+{
+	Mat ITset = Mat_<double>(8, 1);
+
+	ITset.at<double>(0, 0) = 1;											// Bias
+	ITset.at<double>(1, 0) = roundf(evaluation.at<double>(0, 0) * 100); // Cirkel
+	ITset.at<double>(2, 0) = roundf(evaluation.at<double>(1, 0) * 100); // Vierkant
+	ITset.at<double>(3, 0) = roundf(evaluation.at<double>(2, 0) * 100); // Driehoek
+	ITset.at<double>(4, 0) = 1.0;										// Aantal hoeken
+	ITset.at<double>(5, 0) = IO.getContour().size();					// Omtrek
+	ITset.at<double>(6, 0) = IO.getSurface();							// Oppervlak
+	ITset.at<double>(7, 0) = (int)IO.getEquality();						// Gelijk figuur
+
+	trainingSet = ITset;
+	cout << trainingSet << endl;
 }
 
 // func: Initialization of the (1) weigthmatrices V0 and W0 and (2) of the delta matrices dV0 and dW0. 
@@ -147,7 +247,7 @@ void Figure_BPN::initializeBPN(int inputNeurons, int hiddenNeurons, int outputNe
 	setValue(dW0, 0);
 } // initializeBPN
 
-void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages, Mat& V0, Mat& W0)
+void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages, Mat& V0, Mat& W0, int nr)
 {
 	// V0, W0   : weightfactor matrices
 	// dV0, dW0 : weightfactor correction matrices
@@ -156,12 +256,12 @@ void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages, Mat& V0, Mat
 	// default number of hiddenNeurons. The definite number is user input  
 	// inputNeurons and outputNeurons are implicitly determined via
 	// the trainingset, i.e.: inputNeurons = ITset.cols ; outputNeurons = OTset.cols;
-	int hiddenNeurons = 4;
+	int hiddenNeurons = 5;
 
 	//cout << m << endl << endl;
 	Mat ITS, OTS;
 	createBPNInput(trainingImages,ITS);
-	createBPNOutput(0,OTS);
+	createBPNOutput(nr,OTS);
 
 	// IT: current training input of the inputlayer 
 	// OT: desired training output of the BPN
@@ -262,6 +362,17 @@ void Figure_BPN::evaluateImage(vector<double> sortChaincode, Mat V0, Mat W0, Mat
 	createBPNInput(sortChaincode, IT);
 	calculateOutputHiddenLayer(IT, V0, OH);
 	calculateOutputBPN(OH, W0, OO);
+
+	evaluation = OO;
+}
+
+void Figure_BPN::evaluateAdvImage(ImageObject IO, Mat V1, Mat W1, Mat& evaluation) {
+	Mat IT;
+	Mat OH;
+	Mat OO;
+	createBPNInput(IO, evaluation, IT);
+	calculateOutputHiddenLayer(IT, V1, OH);
+	calculateOutputBPN(OH, W1, OO);
 
 	evaluation = OO;
 }
