@@ -69,7 +69,7 @@ void Figure_BPN::createBPNOutput(int type, Mat &OTset)
 			0, 0, 1);
 		break;
 	case 1:
-		OTset = (Mat_<double>(80, 7) <<
+		OTset = (Mat_<double>(80, 8) <<
 			1, 0, 0, 0, 0, 0, 0, 1,
 			1, 0, 0, 0, 0, 0, 0, 1,
 			1, 0, 0, 0, 0, 0, 0, 1,
@@ -156,9 +156,7 @@ void Figure_BPN::createBPNOutput(int type, Mat &OTset)
 
 void Figure_BPN::createBPNInput(vector<vector<ImageObject>> trainingImages, Mat &trainingSet) {
 
-	//Mat ITset = Mat_<double>(30, 9);
-	Mat ITset = Mat_<double>(80, 9);
-
+	Mat ITset = Mat_<double>((int)(trainingImages.size() * 10), 9);
 
 	int counter = 0;
 	for (int o = 0; o < trainingImages.size(); o++)
@@ -224,7 +222,6 @@ void Figure_BPN::createBPNInput(ImageObject IO, Mat& evaluation, Mat &trainingSe
 	ITset.at<double>(7, 0) = (int)IO.getEquality();						// Gelijk figuur
 
 	trainingSet = ITset;
-	cout << trainingSet << endl;
 }
 
 // func: Initialization of the (1) weigthmatrices V0 and W0 and (2) of the delta matrices dV0 and dW0. 
