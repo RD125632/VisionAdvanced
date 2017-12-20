@@ -172,7 +172,7 @@ void Figure_BPN::createBPNOutput(int amountOfSets, int inSet, Mat &OTset)
 
 void Figure_BPN::createBPNInput(vector<vector<ImageObject>> trainingImages, Mat &trainingSet) {
 
-	Mat ITset = Mat_<double>(30, 9);
+	Mat ITset = Mat_<double>(trainingImages.size()*10, 9);
 
 	int counter = 0;
 	for (int o = 0; o < trainingImages.size(); o++)
