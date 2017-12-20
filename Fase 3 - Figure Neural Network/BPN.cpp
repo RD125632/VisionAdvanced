@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "BPN.h"
 
+#define PI 3.14159265
+
 // Loading functions
 void Figure_BPN::loadTrainingFigures(vector<string> &figureSets, vector<vector<ImageObject>> &trainingImages)
 {
@@ -32,131 +34,145 @@ void Figure_BPN::loadTrainingFigures(vector<string> &figureSets, vector<vector<I
 }
 
 // Set creation
-void Figure_BPN::createBPNOutput(int type, Mat &OTset)
+void Figure_BPN::createBPNOutput(int amountOfSets, int inSet, Mat &OTset)
 {
-	switch (type) {
-	case 0:
-		OTset = (Mat_<double>(30, 3) <<
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0,
-			1, 0, 0, 
-			1, 0, 0, 
-			1, 0, 0, 
-			1, 0, 0, //Cirkel
-			0, 1, 0, 
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 1, 0, 
-			0, 1, 0, 
-			0, 1, 0, 
-			0, 1, 0, 
-			0, 1, 0, 
-			0, 1, 0,  //Vierkant
-			0, 0, 1, 
-			0, 0, 1, 
-			0, 0, 1, 
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1);
-		break;
-	case 1:
-		OTset = (Mat_<double>(80, 8) <<
-			1, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 1, //Cirkel
-			0, 1, 0, 0, 0, 0, 0, 1,
-			0, 1, 0, 0, 0, 0, 0, 1,
-			0, 1, 0, 0, 0, 0, 0, 1,
-			0, 1, 0, 0, 0, 0, 0, 1,
-			0, 1, 0, 0, 0, 0, 0, 1,
-			0, 1, 0, 0, 0, 0, 0, 1,
-			0, 1, 0, 0, 0, 0, 0, 1,
-			0, 1, 0, 0, 0, 0, 0, 1,
-			0, 1, 0, 0, 0, 0, 0, 1,
-			0, 1, 0, 0, 0, 0, 0, 1, //Vierkant
-			0, 0, 1, 0, 0, 0, 0, 0, 
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0, //Driehoek
-			0, 0, 0, 1, 0, 0, 0, 0,
-			0, 0, 0, 1, 0, 0, 0, 0,
-			0, 0, 0, 1, 0, 0, 0, 0,
-			0, 0, 0, 1, 0, 0, 0, 0,
-			0, 0, 0, 1, 0, 0, 0, 0,
-			0, 0, 0, 1, 0, 0, 0, 0,
-			0, 0, 0, 1, 0, 0, 0, 0,
-			0, 0, 0, 1, 0, 0, 0, 0,
-			0, 0, 0, 1, 0, 0, 0, 0,
-			0, 0, 0, 1, 0, 0, 0, 0, //Hart
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, //Penta
-			0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 1, 1, 0, 1, 0, 0, //Pijl
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0,
-			0, 0, 1, 0, 0, 0, 0, 0, //Rechthoek
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0); // Ster
-		break;
+	int totalTrainingInputImages = amountOfSets * inSet;
+	OTset = (Mat_<double>(totalTrainingInputImages, amountOfSets));
+	for (int index = 0; index < totalTrainingInputImages; index++) {
+		for (int index1 = 0; index1 < inSet; index1++) {
+			if (index1 == index / 10) {
+				setEntry(OTset, index, index1, 1);
+			}
+			else {
+				setEntry(OTset, index, index1, 0);
+			}
+		}
+		cout << OTset << endl;
 	}
+
+	//switch (type) {
+	//case 0:
+	//	OTset = (Mat_<double>(30, 3) <<
+	//		1, 0, 0,
+	//		1, 0, 0,
+	//		1, 0, 0,
+	//		1, 0, 0,
+	//		1, 0, 0,
+	//		1, 0, 0,
+	//		1, 0, 0, 
+	//		1, 0, 0, 
+	//		1, 0, 0, 
+	//		1, 0, 0, //Cirkel
+	//		0, 1, 0, 
+	//		0, 1, 0,
+	//		0, 1, 0,
+	//		0, 1, 0,
+	//		0, 1, 0, 
+	//		0, 1, 0, 
+	//		0, 1, 0, 
+	//		0, 1, 0, 
+	//		0, 1, 0, 
+	//		0, 1, 0,  //Vierkant
+	//		0, 0, 1, 
+	//		0, 0, 1, 
+	//		0, 0, 1, 
+	//		0, 0, 1,
+	//		0, 0, 1,
+	//		0, 0, 1,
+	//		0, 0, 1,
+	//		0, 0, 1,
+	//		0, 0, 1,
+	//		0, 0, 1);
+	//	break;
+	//case 1:
+	//	OTset = (Mat_<double>(80, 8) <<
+	//		1, 0, 0, 0, 0, 0, 0, 0,
+	//		1, 0, 0, 0, 0, 0, 0, 0,
+	//		1, 0, 0, 0, 0, 0, 0, 0,
+	//		1, 0, 0, 0, 0, 0, 0, 1,
+	//		1, 0, 0, 0, 0, 0, 0, 1,
+	//		1, 0, 0, 0, 0, 0, 0, 1,
+	//		1, 0, 0, 0, 0, 0, 0, 1,
+	//		1, 0, 0, 0, 0, 0, 0, 1,
+	//		1, 0, 0, 0, 0, 0, 0, 1,
+	//		1, 0, 0, 0, 0, 0, 0, 1, //Cirkel
+	//		0, 1, 0, 0, 0, 0, 0, 1,
+	//		0, 1, 0, 0, 0, 0, 0, 1,
+	//		0, 1, 0, 0, 0, 0, 0, 1,
+	//		0, 1, 0, 0, 0, 0, 0, 1,
+	//		0, 1, 0, 0, 0, 0, 0, 1,
+	//		0, 1, 0, 0, 0, 0, 0, 1,
+	//		0, 1, 0, 0, 0, 0, 0, 1,
+	//		0, 1, 0, 0, 0, 0, 0, 1,
+	//		0, 1, 0, 0, 0, 0, 0, 1,
+	//		0, 1, 0, 0, 0, 0, 0, 1, //Vierkant
+	//		0, 0, 1, 0, 0, 0, 0, 0, 
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0, //Driehoek
+	//		0, 0, 0, 1, 0, 0, 0, 0,
+	//		0, 0, 0, 1, 0, 0, 0, 0,
+	//		0, 0, 0, 1, 0, 0, 0, 0,
+	//		0, 0, 0, 1, 0, 0, 0, 0,
+	//		0, 0, 0, 1, 0, 0, 0, 0,
+	//		0, 0, 0, 1, 0, 0, 0, 0,
+	//		0, 0, 0, 1, 0, 0, 0, 0,
+	//		0, 0, 0, 1, 0, 0, 0, 0,
+	//		0, 0, 0, 1, 0, 0, 0, 0,
+	//		0, 0, 0, 1, 0, 0, 0, 0, //Hart
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0, //Penta
+	//		0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 1, 1, 0, 1, 0, 0, //Pijl
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 0, 1, 0, 0, 0, 0, 0, //Rechthoek
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0); // Ster
+	//	break;
+	//}
 }
 
 void Figure_BPN::createBPNInput(vector<vector<ImageObject>> trainingImages, Mat &trainingSet) {
 
-	Mat ITset = Mat_<double>((int)(trainingImages.size() * 10), 9);
+	Mat ITset = Mat_<double>(30, 9);
 
 	int counter = 0;
 	for (int o = 0; o < trainingImages.size(); o++)
@@ -175,10 +191,21 @@ void Figure_BPN::createBPNInput(vector<vector<ImageObject>> trainingImages, Mat 
 			int max = distance(plottedChainCode.begin(), max_element(plottedChainCode.begin(), plottedChainCode.end()));
 			double maxV = plottedChainCode.at(max);
 
+			//Add chaincode to set
 			for (int c = 0; c < 8; c++)
 			{
 				ITset.at<double>(counter, c + 1) = plottedChainCode.at(c) / maxV;
 			}
+			/*
+			//Add angles to set
+			vector<double> temp1 = calculateAngle(5, unplotted);
+			for (int d = 8; d < 13; d++)  
+			{	
+				ITset.at<double>(counter, d + 1) = temp1.at(d-8);
+			}*/
+
+			//ITset.at<double>(counter, 9) = 1 / m.getContour().size();					// Omtrek
+			//ITset.at<double>(counter, 9) = (int)m.getEquality();					// Gelijk figuur
 			counter++;
 		}
 	}
@@ -258,7 +285,7 @@ void Figure_BPN::train(vector<vector<ImageObject>> &trainingImages, Mat& V0, Mat
 	//cout << m << endl << endl;
 	Mat ITS, OTS;
 	createBPNInput(trainingImages,ITS);
-	createBPNOutput(nr,OTS);
+	createBPNOutput(trainingImages.size(),10,OTS);
 
 	// IT: current training input of the inputlayer 
 	// OT: desired training output of the BPN
@@ -372,4 +399,100 @@ void Figure_BPN::evaluateAdvImage(ImageObject IO, Mat V1, Mat W1, Mat& evaluatio
 	calculateOutputBPN(OH, W1, OO);
 
 	evaluation = OO;
+}
+
+vector<double> Figure_BPN::calculateAngle(int nrOfOutputs, vector<double> chainCode) {
+
+	if (chainCode.size() % nrOfOutputs == 0) { nrOfOutputs--; }
+	// calculate vector size
+	int pieceSize = chainCode.size() / nrOfOutputs;
+	pieceSize++;
+
+	// init vector
+	vector<vector<int>> temp;
+	vector<int> empty;
+	empty.push_back(0);
+
+	Point a;
+	Point b;
+
+	// initialize
+	for (int index = 0; index < nrOfOutputs; index++) {
+		temp.push_back(empty);
+	}
+
+	// sampling the chaincode
+	for (int index = 0; index < chainCode.size(); index++) {
+		temp.at(index / pieceSize).push_back(chainCode.at(index));
+	}
+
+	Point tempP;
+	// create a vector of point for samplepoints
+	vector<Point> points;
+	points.push_back({ 0,0 });
+
+	for (int index = 0; index < temp.size(); index++) {
+		points.push_back(points.at((points.size() - 1)));
+		for (int index1 = 1; index1 < temp.at(index).size(); index1++) {
+			if (temp.at(index).at(index1) == 0) {
+				points.at(points.size() - 1).x++;
+			}
+			if (temp.at(index).at(index1) == 1) {
+				points.at(points.size() - 1).x++;
+				points.at(points.size() - 1).y++;
+			}
+			if (temp.at(index).at(index1) == 2) {
+				points.at(points.size() - 1).y++;
+			}
+			if (temp.at(index).at(index1) == 3) {
+				points.at(points.size() - 1).x--;
+				points.at(points.size() - 1).y++;
+			}
+			if (temp.at(index).at(index1) == 4) {
+				points.at(points.size() - 1).x--;
+			}
+			if (temp.at(index).at(index1) == 5) {
+				points.at(points.size() - 1).x--;
+				points.at(points.size() - 1).y--;
+			}
+			if (temp.at(index).at(index1) == 6) {
+				points.at(points.size() - 1).y--;
+			}
+			if (temp.at(index).at(index1) == 7) {
+				points.at(points.size() - 1).x++;
+				points.at(points.size() - 1).y--;
+			}
+
+		}
+
+		// subtract two latest points
+		tempP = points.at(points.size() - 1) - points.at(points.size() - 2);
+	}
+
+	// get angles
+	vector<double> angles;
+	for (int index = 0; index < points.size() - 1; index++) {
+		if (index == 0) {
+			a = points.at(points.size() - 2) - points.at(0);
+			b = points.at(1) - points.at(0);
+			angles.push_back(GetAngleABC(a, b));
+		}
+		else {
+			a = points.at(index - 1) - points.at(index);
+			b = points.at(index + 1) - points.at(index);
+			angles.push_back(GetAngleABC(a, b));
+		}
+	}
+
+	double max = angles.at(distance(angles.begin(), max_element(angles.begin(), angles.end())));
+	for (int index = 0; index < angles.size(); index++) {
+		angles.at(index) /= max;
+	}
+	return angles;
+}
+
+double Figure_BPN::GetAngleABC(Point a, Point b)
+{
+	// calculate dot product
+	return acos((a.x * b.x + a.y * b.y) / (sqrt(pow(a.x, 2) + pow(a.y, 2)) * sqrt(pow(b.x, 2) + pow(b.y, 2)))) * 180 / PI;
 }
